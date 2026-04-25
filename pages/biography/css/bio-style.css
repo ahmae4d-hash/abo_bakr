@@ -18,7 +18,7 @@ body {
   font-family: "Cairo", sans-serif;
   background-color: var(--primary-bg);
   color: var(--text-color);
-  background-image: url("..images/pattern.png"); /* الخلفية الزخرفية */
+  background-image: url("assets/images/personal/aboo_bakr.jpg")
   transition: all 0.3s ease;
 }
 /* شاشة التحميل */
