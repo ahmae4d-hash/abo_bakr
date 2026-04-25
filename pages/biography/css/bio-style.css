@@ -18,10 +18,9 @@ body {
   font-family: "Cairo", sans-serif;
   background-color: var(--primary-bg);
   color: var(--text-color);
-  background-image: url("../images/pattern.png"); /* الخلفية الزخرفية */
+  background-image: url("..images/pattern.png"); /* الخلفية الزخرفية */
   transition: all 0.3s ease;
 }
-
 /* شاشة التحميل */
 #loader-wrapper {
   position: fixed;
@@ -51,7 +50,7 @@ body {
 /* الهيدر */
 .hero-banner {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("/assets/images/personal/aboo_bakr.jpg");
+    url("assets/images/personal/aboo_bakr.jpg");
   background-size: cover;
   background-position: center;
   height: 420px;
