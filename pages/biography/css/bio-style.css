@@ -1,0 +1,151 @@
+:root {
+  --primary-bg: #fdfaf3;
+  --card-bg: #ffffff;
+  --text-color: #2c3e50;
+  --accent: #8e1c1c;
+  --gold: #c5a059;
+}
+
+[data-theme="dark"] {
+  --primary-bg: #1a1a1a;
+  --card-bg: #2d2d2d;
+  --text-color: #e0e0e0;
+  --accent: #ff4d4d;
+  --gold: #d4af37;
+}
+
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+  background-image: url("../images/pattern.png"); /* الخلفية الزخرفية */
+  transition: all 0.3s ease;
+}
+
+/* شاشة التحميل */
+#loader-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+}
+.loader-gold {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* الهيدر */
+.hero-banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/assets/images/personal/aboo_bakr.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-title {
+  font-family: "Amiri", serif;
+  font-size: 4.5rem;
+  text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile-pic {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  border: 8px solid var(--card-bg);
+  object-fit: cover;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3), 0 0 20px var(--gold);
+  transition: 0.4s;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05);
+}
+
+/* المقالات */
+.article-container {
+  max-width: 900px;
+  margin: 160px auto 60px;
+  background: var(--card-bg);
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  border-top: 6px solid var(--gold);
+}
+
+.section-title {
+  font-family: "Amiri", serif;
+  color: var(--accent);
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+}
+
+.story-text {
+  font-family: "Amiri", serif;
+  font-size: 1.4rem;
+  line-height: 2.2;
+  text-align: justify;
+  white-space: pre-line;
+}
+
+.floating-tools {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: var(--card-bg);
+  padding: 12px;
+  border-radius: 50px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tool-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.tool-btn:hover {
+  color: var(--gold);
+}
+
+#scrollToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--accent);
+  color: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  display: none;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}

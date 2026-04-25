@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المكتبة المرئية | موسوعة الصديق</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap");
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background-color: #f9fafb;
+      }
+
+      /* أنيميشن التحميل الأولي */
+      #page-loader {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* تأثير Skeleton أثناء جلب بيانات الـ JSON */
+      .skeleton-card {
+        background: #eee;
+        background: linear-gradient(
+          110deg,
+          #ececec 8%,
+          #f5f5f5 18%,
+          #ececec 33%
+        );
+        border-radius: 1rem;
+        height: 300px;
+        background-size: 200% 100%;
+        animation: shine 1.5s linear infinite;
+      }
+      @keyframes shine {
+        to {
+          background-position-x: -200%;
+        }
+      }
+
+      .video-container iframe {
+        border-radius: 1rem 1rem 0 0;
+        border-bottom: 5px solid #d4af37; /* لمسة ذهبية */
+      }
+
+      .category-title {
+        position: relative;
+        padding-right: 1.5rem;
+      }
+      .category-title::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 6px;
+        background: #064e3b;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page-loader">
+      <div class="spinner-border text-emerald-800 mb-3" role="status"></div>
+      <p
+        class="text-emerald-900 font-bold animate__animated animate__pulse animate__infinite"
+      >
+        جاري تحميل المكتبة المرئية...
+      </p>
+    </div>
+
+    <header class="bg-emerald-900 text-white py-16 mb-12 shadow-inner">
+      <div class="container mx-auto px-4 text-center">
+        <h1
+          class="text-5xl font-black mb-4 animate__animated animate__fadeInDown"
+        >
+          المكتبة المرئية الشاملة
+        </h1>
+        <p class="text-xl text-emerald-100 opacity-80 max-w-2xl mx-auto">
+          استمتع بمشاهدة السيرة الكاملة لأبي بكر الصديق رضي الله عنه، مقسمة
+          تقنيًا لتسهيل الوصول لأي مرحلة تاريخية.
+        </p>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 pb-20">
+      <div id="media-content">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-white border-t py-10 text-center">
+      <p class="text-gray-500">
+        موسوعة الصديق المرئية &copy; 2026 - تجربة مستخدم ذكية
+      </p>
+    </footer>
+
+    <script>
+      const JSON_PATH = "videos_data.json"; // مسار ملف الجاسون الذي أنشأناه
+
+      async function initLibrary() {
+        const container = document.getElementById("media-content");
+
+        try {
+          const response = await fetch(JSON_PATH);
+          if (!response.ok) throw new Error("File not found");
+          const data = await response.json();
+
+          let htmlContent = "";
+
+          data.categories.forEach((category) => {
+            htmlContent += `
+                        <section class="mb-20 animate__animated animate__fadeInUp">
+                            <div class="mb-8">
+                                <h2 class="category-title text-3xl font-black text-emerald-900 mb-2">${
+                                  category.category_name
+                                }</h2>
+                                <p class="text-gray-500">${
+                                  category.description
+                                }</p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                ${category.videos
+                                  .map(
+                                    (video) => `
+                                    <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden group">
+                                        <div class="video-container aspect-video overflow-hidden">
+                                            <iframe 
+                                                class="w-full h-full group-hover:scale-105 transition-transform duration-700" 
+                                                src="https://www.youtube.com/embed/${
+                                                  video.youtube_id
+                                                }${
+                                      video.start_time
+                                        ? "?start=" +
+                                          convertToSeconds(video.start_time)
+                                        : ""
+                                    }" 
+                                                title="${video.title}" 
+                                                frameborder="0" 
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                allowfullscreen
+                                                loading="lazy">
+                                            </iframe>
+                                        </div>
+                                        <div class="p-5">
+                                            <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-emerald-700 transition-colors">
+                                                ${video.title}
+                                            </h3>
+                                            <p class="text-sm text-gray-500 leading-relaxed">
+                                                ${video.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                `
+                                  )
+                                  .join("")}
+                            </div>
+                        </section>
+                    `;
+          });
+
+          container.innerHTML = htmlContent;
+        } catch (err) {
+          container.innerHTML = `<div class="alert alert-danger text-center">عذراً، فشل تحميل ملف الـ JSON. تأكد من رفعه في المسار الصحيح.</div>`;
+        } finally {
+          // إخفاء شاشة التحميل بعد الانتهاء
+          document
+            .getElementById("page-loader")
+            .classList.add("animate__animated", "animate__fadeOut");
+          setTimeout(() => {
+            document.getElementById("page-loader").style.display = "none";
+          }, 800);
+        }
+      }
+
+      // دالة مساعدة لتحويل الوقت (00:00:00) إلى ثواني ليوتيوب
+      function convertToSeconds(hms) {
+        const a = hms.split(":");
+        return +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
+      }
+
+      window.onload = initLibrary;
+    </script>
+  </body>
+</html>

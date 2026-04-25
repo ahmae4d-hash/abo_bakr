@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سيرة الصديق - العرض الفاخر</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/pages/biography/css/bio-style.css" />
+  </head>
+  <body>
+    <div id="loader-wrapper">
+      <div class="loader-gold"></div>
+      <p>جاري تحميل السيرة العطرة...</p>
+    </div>
+
+    <div class="floating-tools">
+      <button class="tool-btn" onclick="toggleDarkMode()" title="وضع ليلي">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="tool-btn" id="translateBtn" title="ترجمة اللغات">
+        <i class="fas fa-language"></i>
+      </button>
+      <div id="google_translate_element" style="display: none"></div>
+    </div>
+
+    <header class="hero-banner">
+      <div class="text-center text-white" data-aos="zoom-in">
+        <h1 class="hero-title">أبو بكر الصديق</h1>
+        <p class="fs-4 fw-light">رضي الله عنه وأرضاه</p>
+      </div>
+      <div class="profile-container">
+        <img
+          src="/assets/images/personal/تنزيل (1).jpg"
+          alt="صورة الصديق"
+          class="profile-pic"
+          onerror="this.src='https://via.placeholder.com/210?text=صورة+تعريفية'"
+        />
+      </div>
+    </header>
+
+    <main class="container" id="content-main"></main>
+
+    <button
+      id="scrollToTop"
+      onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "ar",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+          },
+          "google_translate_element"
+        );
+      }
+      document.getElementById("translateBtn").onclick = function () {
+        const el = document.getElementById("google_translate_element");
+        el.style.display = el.style.display === "none" ? "block" : "none";
+      };
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/pages/biography/js/bio-script.js"></script>
+  </body>
+</html>
